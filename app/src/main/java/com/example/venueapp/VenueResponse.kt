@@ -9,13 +9,9 @@ data class Result(
     val distance: Int,
     val location : Location,
     val geocodes: Geocode,
-    val category: List<Categories>,
     val fsq_id: String
 )
 
-data class Categories(
-    val name: String
-)
 data class Geocode(
     val main: Main
 )

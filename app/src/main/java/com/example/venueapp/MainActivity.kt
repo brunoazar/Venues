@@ -28,6 +28,16 @@ class MainActivity : AppCompatActivity(){
         })
         viewModel.getVenues()
 
+        viewModel.photoLiveData.observe(this, Observer{
+            if(it.photoURL != null){
+                setImageRecyclerView(it)
+            } else{
+                Toast.makeText(this, "Error in getting list", Toast.LENGTH_SHORT).show()
+            }
+        })
+
+       //viewModel.getVenues()
+
         if (Build.VERSION.SDK_INT >= 21) {
             val window = this.window
             window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
@@ -37,10 +47,16 @@ class MainActivity : AppCompatActivity(){
 
     }
 
-    private fun setupRecyclerView(results: List<Result>) {
+    private fun setupRecyclerView(venueItems: List<VenueItem>) {
         binding.recyclerView.layoutManager = LinearLayoutManager(this)
-        recyclerAdapter = VenuesAdapter(results)
+        recyclerAdapter = VenuesAdapter(venueItems)
         binding.recyclerView.adapter = recyclerAdapter
     }
+
+    private fun setImageRecyclerView(venueItem : VenueItem){
+       recyclerAdapter.getImage(venueItem)
+    }
+
+
 
 }
