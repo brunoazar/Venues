@@ -11,5 +11,5 @@ interface VenueImageService {
         "Authorization:fsq3hyZbbM+ITLoW8QMyWi7A6iXhN4PtYeITRLl5tu6cICg="
     )
     @GET("/v3/places/{fsqId}/photos")
-    fun getImage(@Path("fsqId") fsqId: String): Call<List<Photo>>
+    fun getImage(@Path("fsqId") fsqId: String): Call<Photo>
 }

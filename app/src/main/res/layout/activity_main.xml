@@ -6,35 +6,44 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/Title"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
-        android:background="@color/red">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="VENUES"
-            android:textColor="@color/black"
-            android:textStyle="bold"
-            android:layout_marginTop="20dp"
-            android:textSize="50dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerView"
+    <FrameLayout
+        android:id="@+id/FrameLayout"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/Title">
-    </androidx.recyclerview.widget.RecyclerView>
+        app:layout_constraintBottom_toTopOf="@id/Buttons"
+        app:layout_constraintTop_toTopOf="parent"
+        />
 
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/Buttons"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:background="@color/black"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+    <Button
+        android:id="@+id/VenueListButton"
+        android:layout_width="150dp"
+        android:layout_height="50dp"
+        android:backgroundTint="@color/red"
+        android:textColor="@color/black"
+        android:text="VENUE LIST"
+        app:layout_constraintBottom_toBottomOf="@id/Buttons"
+        app:layout_constraintTop_toTopOf="@id/Buttons"
+        app:layout_constraintStart_toStartOf="@id/Buttons"
+        android:layout_marginStart="40dp"/>
+
+    <Button
+        android:id="@+id/GoogleMapsButton"
+        android:layout_width="150dp"
+        android:layout_height="50dp"
+        android:backgroundTint="@color/red"
+        android:textColor="@color/black"
+        android:text="GOOGLE MAPS"
+        app:layout_constraintBottom_toBottomOf="@id/Buttons"
+        app:layout_constraintTop_toTopOf="@id/Buttons"
+        app:layout_constraintEnd_toEndOf="@id/Buttons"
+        android:layout_marginEnd="40dp"/>
 
 
 
