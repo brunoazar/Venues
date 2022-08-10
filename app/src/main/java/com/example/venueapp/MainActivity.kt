@@ -11,6 +11,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.venueapp.databinding.ActivityMainBinding 
 
 class MainActivity : AppCompatActivity(){
+
+
     lateinit var binding : ActivityMainBinding
 
 

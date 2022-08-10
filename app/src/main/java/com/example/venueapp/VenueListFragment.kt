@@ -15,12 +15,9 @@ import com.example.venueapp.databinding.FragmentVenueListBinding
 class VenueListFragment : Fragment() {
 
 
-    private var binding: FragmentVenueListBinding? = null
-    lateinit var recyclerAdapter: VenuesAdapter
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-    }
+     var binding: FragmentVenueListBinding? = null
+     lateinit var recyclerAdapter: VenuesAdapter
+     lateinit var venueList: List<Result>
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -41,6 +38,7 @@ class VenueListFragment : Fragment() {
         viewModel.venuesResponseLiveData.observe(viewLifecycleOwner, Observer {
             if (it.isNotEmpty()) {
                 setupRecyclerView(it)
+                venueList=it
             } else {
                 //Toast.makeText(this, "Error in getting list", Toast.LENGTH_SHORT).show()
             }

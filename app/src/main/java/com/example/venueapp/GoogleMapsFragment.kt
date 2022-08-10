@@ -15,6 +15,8 @@ class GoogleMapsFragment : Fragment() {
 
 
     private var binding: FragmentVenueListBinding? = null
+    var venueFragment= VenueListFragment()
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,10 +32,11 @@ class GoogleMapsFragment : Fragment() {
         val supportMapFragment = SupportMapFragment()
         childFragmentManager.findFragmentById(R.id.fragmentMap)
 
+
         supportMapFragment.getMapAsync(OnMapReadyCallback{
 
             fun onMapReady(googleMap : GoogleMap){
-
+                val venueList =venueFragment.venueList
                 googleMap.setOnMapClickListener(GoogleMap.OnMapClickListener {
 
                     fun onMapClick(latlng: LatLng){
@@ -48,17 +51,22 @@ class GoogleMapsFragment : Fragment() {
 
                         googleMap.addMarker(markerOptions)
                     }
-
-
                 })
+
+                 for(venue: Result in venueList){
+                     val latitudeLongitude = LatLng(
+                         venue.geocodes[0].main.latitude.toDouble(),
+                         venue.geocodes[0].main.longitude.toDouble())
+                     googleMap.addMarker(MarkerOptions().position(latitudeLongitude).title("" + latitudeLongitude.latitude + ":" + latitudeLongitude.longitude))
+                     googleMap.animateCamera(CameraUpdateFactory.zoomTo(15.0f))
+                     googleMap.moveCamera(CameraUpdateFactory.newLatLng(latitudeLongitude))
+
+                 }
 
 
             }
         })
-
         return view
-
-
     }
 
     override fun onDestroyView() {
