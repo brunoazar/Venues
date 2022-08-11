@@ -55,8 +55,8 @@ class GoogleMapsFragment : Fragment() {
 
                  for(venue: Result in venueList){
                      val latitudeLongitude = LatLng(
-                         venue.geocodes[0].main[0].latitude.toDouble(),
-                         venue.geocodes[0].main[0].longitude.toDouble())
+                         venue.geocodes.main.latitude.toDouble(),
+                         venue.geocodes.main.longitude.toDouble())
                      googleMap.addMarker(MarkerOptions().position(latitudeLongitude).title("" + latitudeLongitude.latitude + ":" + latitudeLongitude.longitude))
                      googleMap.animateCamera(CameraUpdateFactory.zoomTo(15.0f))
                      googleMap.moveCamera(CameraUpdateFactory.newLatLng(latitudeLongitude))

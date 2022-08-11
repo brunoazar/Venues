@@ -8,7 +8,7 @@ data class Result(
     val name: String,
     val distance: Int,
     val location : Location,
-    val geocodes: List<Geocode>,
+    val geocodes: Geocode,
     val category: List<Categories>,
     val fsq_id: String
 )
@@ -17,7 +17,7 @@ data class Categories(
     val name: String
 )
 data class Geocode(
-    val main: List<Main>
+    val main: Main
 )
 
 data class Main(
