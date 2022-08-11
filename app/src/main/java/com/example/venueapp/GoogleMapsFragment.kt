@@ -37,26 +37,26 @@ class GoogleMapsFragment : Fragment() {
 
             fun onMapReady(googleMap : GoogleMap){
                 val venueList =venueFragment.venueList
-                googleMap.setOnMapClickListener(GoogleMap.OnMapClickListener {
+                //googleMap.setOnMapClickListener(GoogleMap.OnMapClickListener {
 
-                    fun onMapClick(latlng: LatLng){
-                        val markerOptions= MarkerOptions()
-                        markerOptions.position(latlng)
-                        markerOptions.title("" + latlng.latitude + ":" + latlng.longitude)
-
-                        googleMap.clear()
-                        googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(
-                            latlng, 10.0F
-                        ))
-
-                        googleMap.addMarker(markerOptions)
-                    }
-                })
+//                    fun onMapClick(latlng: LatLng){
+//                        val markerOptions= MarkerOptions()
+//                        markerOptions.position(latlng)
+//                        markerOptions.title("" + latlng.latitude + ":" + latlng.longitude)
+//
+//                        googleMap.clear()
+//                        googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(
+//                            latlng, 10.0F
+//                        ))
+//
+//                        googleMap.addMarker(markerOptions)
+//                    }
+             //   })
 
                  for(venue: Result in venueList){
                      val latitudeLongitude = LatLng(
-                         venue.geocodes[0].main.latitude.toDouble(),
-                         venue.geocodes[0].main.longitude.toDouble())
+                         venue.geocodes[0].main[0].latitude.toDouble(),
+                         venue.geocodes[0].main[0].longitude.toDouble())
                      googleMap.addMarker(MarkerOptions().position(latitudeLongitude).title("" + latitudeLongitude.latitude + ":" + latitudeLongitude.longitude))
                      googleMap.animateCamera(CameraUpdateFactory.zoomTo(15.0f))
                      googleMap.moveCamera(CameraUpdateFactory.newLatLng(latitudeLongitude))

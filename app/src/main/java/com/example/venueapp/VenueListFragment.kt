@@ -19,6 +19,7 @@ class VenueListFragment : Fragment() {
      lateinit var recyclerAdapter: VenuesAdapter
      lateinit var venueList: List<Result>
 
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?

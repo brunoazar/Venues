@@ -17,7 +17,7 @@ data class Categories(
     val name: String
 )
 data class Geocode(
-    val main: Main
+    val main: List<Main>
 )
 
 data class Main(
