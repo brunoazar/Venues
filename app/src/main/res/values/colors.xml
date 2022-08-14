@@ -10,4 +10,5 @@
     <color name="red">#EC0707</color>
     <color name="green">#0BDF14</color>
     <color name="yellow">#FFE500</color>
+    <color name="savingColor">#05EA0E</color>
 </resources>
