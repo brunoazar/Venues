@@ -24,4 +24,6 @@ class VenuesAdapter(private val venues: List<VenueItem>) : RecyclerView.Adapter<
     fun getImage(venueItem: VenueItem) {
         venues[venues.indexOfFirst { venueItem.fsqId == it.fsqId }].photoURL = venueItem.photoURL
     }
+
+
 }
