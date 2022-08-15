@@ -3,12 +3,13 @@ package com.example.venueapp
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.example.venueapp.databinding.ActivityMainBinding 
+import com.example.venueapp.data.fragments.dataBaseFragment.DataBaseFragment
+import com.example.venueapp.databinding.ActivityMainBinding
 
-class MainActivity : AppCompatActivity(){
+class MainActivity : AppCompatActivity() {
 
 
-    lateinit var binding : ActivityMainBinding
+    lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -17,6 +18,7 @@ class MainActivity : AppCompatActivity(){
 
         val venueListFragment = VenueListFragment()
         val googleMapsFragment = GoogleMapsFragment()
+        val database = DataBaseFragment()
 
         supportFragmentManager.beginTransaction().apply {
             replace(R.id.FrameLayout, venueListFragment)
@@ -31,6 +33,14 @@ class MainActivity : AppCompatActivity(){
             }
         }
 
+        binding.DataBaseButton.setOnClickListener {
+            supportFragmentManager.beginTransaction().apply {
+                replace(R.id.FrameLayout, database)
+                addToBackStack(null)
+                commit()
+            }
+        }
+
         binding.GoogleMapsButton.setOnClickListener {
             supportFragmentManager.beginTransaction().apply {
                 replace(R.id.FrameLayout, googleMapsFragment)
@@ -38,10 +48,6 @@ class MainActivity : AppCompatActivity(){
                 commit()
             }
         }
-
-
-
-
 
 
     }

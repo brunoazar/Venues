@@ -56,7 +56,7 @@ class VenueListFragment : Fragment() {
                     ItemTouchHelper.RIGHT ->{
                         val savedItem = venueList[viewHolder.adapterPosition]
                         recyclerAdapter.deleteItem(viewHolder.adapterPosition)
-                        recyclerAdapter.addItemToDataBase(venueList.size, savedItem)
+                        recyclerAdapter.addItemToDataBase(savedItem)
                     }
                 }
             }
