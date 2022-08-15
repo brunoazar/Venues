@@ -17,12 +17,6 @@ class GoogleMapsFragment : Fragment() {
     private var binding: FragmentVenueListBinding? = null
     var venueFragment= VenueListFragment()
 
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -37,7 +31,7 @@ class GoogleMapsFragment : Fragment() {
 
             fun onMapReady(googleMap : GoogleMap){
                 val venueList =venueFragment.venueList
-                //googleMap.setOnMapClickListener(GoogleMap.OnMapClickListener {
+//                googleMap.setOnMapClickListener(GoogleMap.OnMapClickListener {
 
 //                    fun onMapClick(latlng: LatLng){
 //                        val markerOptions= MarkerOptions()

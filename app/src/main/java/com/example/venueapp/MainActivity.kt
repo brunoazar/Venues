@@ -1,15 +1,8 @@
 package com.example.venueapp
 
-import android.os.Build
+
 import android.os.Bundle
-import android.view.WindowManager
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
-import androidx.recyclerview.widget.ItemTouchHelper
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.example.venueapp.databinding.ActivityMainBinding 
 
 class MainActivity : AppCompatActivity(){
