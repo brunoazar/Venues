@@ -34,7 +34,7 @@ class VenuesAdapter(private val venues: MutableList<Result>) : RecyclerView.Adap
         val name = result.name
         val distance = result.distance
         val address = result.location.address
-        
+
         val venueData = VenueData(distance,name,address)
 
 
