@@ -6,10 +6,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.venueapp.databinding.FragmentVenueListBinding
+import dagger.hilt.android.AndroidEntryPoint
 
 
 class VenueListFragment : Fragment() {
@@ -17,7 +19,10 @@ class VenueListFragment : Fragment() {
 
      var binding: FragmentVenueListBinding? = null
      lateinit var recyclerAdapter: VenuesAdapter
-     lateinit var venueList: List<Result>
+     lateinit var venueList : List<Result>
+
+     private val viewModel : VenuesViewModel by activityViewModels()
+
 
 
     override fun onCreateView(
@@ -35,7 +40,7 @@ class VenueListFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val viewModel = ViewModelProvider(this).get(VenuesViewModel::class.java)
+        //val viewModel = ViewModelProvider(this).get(VenuesViewModel::class.java)
         viewModel.venuesResponseLiveData.observe(viewLifecycleOwner, Observer {
             if (it.isNotEmpty()) {
                 setupRecyclerView(it)

@@ -1,12 +1,8 @@
 package com.example.venueapp
 
-import android.widget.ImageView
-import android.widget.Toast
-import android.widget.Toast.LENGTH_SHORT
+
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.bumptech.glide.Glide
-import com.google.android.material.snackbar.BaseTransientBottomBar.LENGTH_SHORT
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
