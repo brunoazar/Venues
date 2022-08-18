@@ -10,6 +10,7 @@ import retrofit2.Response
 class VenuesViewModel: ViewModel() {
 
     val venuesResponseLiveData: MutableLiveData<List<Result>> = MutableLiveData()
+    var clickedVenue: Result? = null
 
     fun getVenues() {
         val venuesService = RetroInstance.getVenuesService()

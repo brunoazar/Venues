@@ -5,11 +5,11 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 
 
-class VenuesAdapter(private val venues: List<Result>) : RecyclerView.Adapter<VenuesViewHolder>() {
+class VenuesAdapter(private val venues: List<Result>,private val recyclerViewInterface: RecyclerViewInterface) : RecyclerView.Adapter<VenuesViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VenuesViewHolder {
         val itemView = LayoutInflater.from(parent.context).inflate(R.layout.item_venues, parent, false)
-        return VenuesViewHolder(itemView)
+        return VenuesViewHolder(itemView, recyclerViewInterface)
     }
 
     override fun onBindViewHolder(holder: VenuesViewHolder, position: Int) {
@@ -19,4 +19,5 @@ class VenuesAdapter(private val venues: List<Result>) : RecyclerView.Adapter<Ven
     override fun getItemCount(): Int {
         return venues.size
     }
+
 }

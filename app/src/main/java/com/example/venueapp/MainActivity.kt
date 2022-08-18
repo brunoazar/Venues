@@ -8,15 +8,16 @@ class MainActivity : AppCompatActivity() {
 
 
     lateinit var binding: ActivityMainBinding
-
+    val venueListFragment = VenueListFragment()
+    val googleMapsFragment = GoogleMapsFragment()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val venueListFragment = VenueListFragment()
-        val googleMapsFragment = GoogleMapsFragment()
+//        val venueListFragment = VenueListFragment()
+//        val googleMapsFragment = GoogleMapsFragment()
 
         supportFragmentManager.beginTransaction().apply {
             replace(R.id.FrameLayout, venueListFragment)
@@ -30,10 +31,6 @@ class MainActivity : AppCompatActivity() {
                 commit()
             }
         }
-
-
-
-
 
 
         binding.GoogleMapsButton.setOnClickListener {

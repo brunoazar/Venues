@@ -1,28 +1,27 @@
 package com.example.venueapp
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
+import androidx.fragment.app.FragmentTransaction
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.venueapp.databinding.FragmentVenueListBinding
-import dagger.hilt.android.AndroidEntryPoint
 
 
-class VenueListFragment : Fragment() {
 
+class VenueListFragment : Fragment(), RecyclerViewInterface{
 
+    val googleMapsFragment = GoogleMapsFragment()
      var binding: FragmentVenueListBinding? = null
      lateinit var recyclerAdapter: VenuesAdapter
      lateinit var venueList : List<Result>
 
      private val viewModel : VenuesViewModel by activityViewModels()
-
 
 
     override fun onCreateView(
@@ -40,13 +39,10 @@ class VenueListFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        //val viewModel = ViewModelProvider(this).get(VenuesViewModel::class.java)
         viewModel.venuesResponseLiveData.observe(viewLifecycleOwner, Observer {
             if (it.isNotEmpty()) {
                 setupRecyclerView(it)
                 venueList=it
-            } else {
-                //Toast.makeText(this, "Error in getting list", Toast.LENGTH_SHORT).show()
             }
         })
         viewModel.getVenues()
@@ -54,9 +50,19 @@ class VenueListFragment : Fragment() {
 
     private fun setupRecyclerView(results: List<Result>) {
         binding?.recyclerView?.layoutManager = LinearLayoutManager(context)
-        recyclerAdapter = VenuesAdapter(results)
+        recyclerAdapter = VenuesAdapter(results, this)
         binding?.recyclerView?.adapter = recyclerAdapter
     }
+
+    override fun onClickVenue(venue : Result) {
+        viewModel.clickedVenue = venue
+        activity?.supportFragmentManager?.beginTransaction()?.apply {
+            replace(R.id.FrameLayout, googleMapsFragment)
+            commit()
+        }
+
+    }
+
 
 
 }

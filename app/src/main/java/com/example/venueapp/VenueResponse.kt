@@ -10,7 +10,8 @@ data class Result(
     val location : Location,
     val geocodes: Geocode,
     val category: List<Categories>,
-    val fsq_id: String
+    val fsq_id: String,
+    var clicked: Boolean = false
 )
 
 data class Categories(

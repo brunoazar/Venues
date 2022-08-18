@@ -19,8 +19,6 @@ import dagger.hilt.android.AndroidEntryPoint
 class GoogleMapsFragment : Fragment(), OnMapReadyCallback {
 
     private val viewModel: VenuesViewModel by activityViewModels()
-    var venueList : List<Result>? = null
-
 
     private var binding: FragmentGoogleMapsBinding? = null
 
@@ -37,15 +35,9 @@ class GoogleMapsFragment : Fragment(), OnMapReadyCallback {
         super.onViewCreated(view, savedInstanceState)
         binding?.MapView?.getMapAsync(this)
         binding?.MapView?.onCreate(savedInstanceState)
-        viewModel.venuesResponseLiveData.observe(viewLifecycleOwner, Observer {
-            if (it.isNotEmpty()) {
-                venueList=it
-            } else {
-                //Toast.makeText(this, "Error in getting list", Toast.LENGTH_SHORT).show()
-            }
-        })
-    }
 
+
+    }
 
 
     override fun onDestroyView() {
@@ -54,7 +46,9 @@ class GoogleMapsFragment : Fragment(), OnMapReadyCallback {
     }
 
     override fun onMapReady(p0: GoogleMap) {
-            for (venue: Result in venueList!!){
+        val venueList = viewModel.venuesResponseLiveData.value
+        if (!venueList.isNullOrEmpty()) {
+            for (venue: Result in venueList) {
                 val latitudeLongitude = LatLng(
                     venue.geocodes.main.latitude.toDouble(),
                     venue.geocodes.main.longitude.toDouble()
@@ -62,13 +56,23 @@ class GoogleMapsFragment : Fragment(), OnMapReadyCallback {
                 p0.addMarker(
                     MarkerOptions().position(latitudeLongitude)
                         .title("" + latitudeLongitude.latitude + ":" + latitudeLongitude.longitude)
-               )
-                //p0.animateCamera(CameraUpdateFactory.zoomTo(14.9f))
-                p0.moveCamera(CameraUpdateFactory.newLatLngZoom(latitudeLongitude,14.9f))
+                )
+                p0.moveCamera(CameraUpdateFactory.newLatLngZoom(latitudeLongitude, 14.9f))
 
             }
 
+            if (viewModel.clickedVenue != null) {
+                val latitudeLongitude = LatLng(
+                    viewModel.clickedVenue!!.geocodes.main.latitude.toDouble(),
+                    viewModel.clickedVenue!!.geocodes.main.longitude.toDouble()
+                )
+                p0.moveCamera(CameraUpdateFactory.newLatLngZoom(latitudeLongitude, 20f))
+                viewModel.clickedVenue = null
+
+            }
+        }
     }
+
 
     override fun onStart() {
         super.onStart()
