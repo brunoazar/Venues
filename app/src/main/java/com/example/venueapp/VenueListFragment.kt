@@ -1,5 +1,6 @@
 package com.example.venueapp
 
+import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -10,19 +11,21 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.venueapp.data.VenueData
+import com.example.venueapp.data.VenueDatabase
 import com.example.venueapp.databinding.FragmentVenueListBinding
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 
 class VenueListFragment : Fragment() {
 
-
-     var binding: FragmentVenueListBinding? = null
-     lateinit var recyclerAdapter: VenuesAdapter
-     lateinit var venueList: List<Result>
-     private val context = MainActivity()
-
-
-
+    private var binding: FragmentVenueListBinding? = null
+    lateinit var recyclerAdapter: VenuesAdapter
+    lateinit var venueList: List<Result>
+    private lateinit var venuesViewModel: VenuesViewModel
+    private lateinit var venueDatabase: VenueDatabase
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -38,25 +41,25 @@ class VenueListFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val viewModel = ViewModelProvider(this).get(VenuesViewModel::class.java)
-        viewModel.venuesResponseLiveData.observe(viewLifecycleOwner, Observer {
+        venuesViewModel = ViewModelProvider(this).get(VenuesViewModel::class.java)
+        venuesViewModel.venuesResponseLiveData.observe(viewLifecycleOwner, Observer {
             if (it.isNotEmpty()) {
                 setupRecyclerView(it)
-                venueList=it
+                venueList = it
             } else {
-                //Toast.makeText(this, "Error in getting list", Toast.LENGTH_SHORT).show()
+
             }
         })
-        viewModel.getVenues()
 
-        val swipeGesture = object: SwipeGesture(this){
+        venuesViewModel.getVenues()
+
+        val swipeGesture = object : SwipeGesture(this) {
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
 
-                when(direction){
-                    ItemTouchHelper.RIGHT ->{
+                when (direction) {
+                    ItemTouchHelper.RIGHT -> {
                         val savedItem = venueList[viewHolder.adapterPosition]
-                        recyclerAdapter.deleteItem(viewHolder.adapterPosition)
-                        recyclerAdapter.addItemToDataBase(savedItem)
+                        addItemToDataBase(savedItem)
                     }
                 }
             }
@@ -68,13 +71,27 @@ class VenueListFragment : Fragment() {
     }
 
 
-
-
     private fun setupRecyclerView(results: List<Result>) {
         binding?.recyclerView?.layoutManager = LinearLayoutManager(context)
         recyclerAdapter = VenuesAdapter(results as MutableList<Result>)
         binding?.recyclerView?.adapter = recyclerAdapter
     }
 
+
+    fun addItemToDataBase(result: Result) {
+        val name = result.name
+        val distance = result.distance
+        val address = result.location.address
+        val venueData = VenueData(null, distance, name, address)
+
+        GlobalScope.launch(Dispatchers.IO) {
+            venueDatabase.venueDataDao().addVenueData(venueData)
+        }
+    }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        venueDatabase = VenueDatabase.getDataBase(context)
+    }
 
 }

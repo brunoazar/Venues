@@ -1,17 +1,23 @@
 package com.example.venueapp
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.core.content.ContentProviderCompat.requireContext
+import androidx.core.content.contentValuesOf
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
+import com.example.venueapp.data.DataBaseActivity
+import com.example.venueapp.data.RecyclerViewAdapter
 import com.example.venueapp.data.VenueData
-import com.example.venueapp.data.VenueDataViewModel
+import com.google.android.material.internal.ContextUtils.getActivity
 
 
 class VenuesAdapter(private val venues: MutableList<Result>) : RecyclerView.Adapter<VenuesViewHolder>() {
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VenuesViewHolder {
-        val itemView = LayoutInflater.from(parent.context).inflate(R.layout.item_venues, parent, false)
+        val itemView =
+            LayoutInflater.from(parent.context).inflate(R.layout.item_venues, parent, false)
         return VenuesViewHolder(itemView)
     }
 
@@ -23,24 +29,12 @@ class VenuesAdapter(private val venues: MutableList<Result>) : RecyclerView.Adap
         return venues.size
     }
 
-    fun deleteItem(i: Int) {
-        venues.removeAt(i)
-        notifyDataSetChanged()
-    }
-
-    private lateinit var venuedataViewModel: VenueDataViewModel
-
-    fun addItemToDataBase(result : Result){
-        val name = result.name
-        val distance = result.distance
-        val address = result.location.address
-
-        val venueData = VenueData(distance,name,address)
 
 
-        notifyDataSetChanged()
-    }
+
+
 
 
 
 }
+

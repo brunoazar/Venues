@@ -19,4 +19,6 @@ class VenuesViewHolder(private val itemView: View): RecyclerView.ViewHolder(item
         distance.text = result.distance.toString()
 
     }
+
+
 }

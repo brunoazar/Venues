@@ -8,11 +8,11 @@
         <entry key="..\:/Users/Bruno/VenueApp/app/src/main/res/drawable-v24/ic_instagram_svgrepo_com.xml" value="0.1555" />
         <entry key="..\:/Users/Bruno/VenueApp/app/src/main/res/drawable-v24/ic_instagram_svgrepo_com__1_.xml" value="0.1555" />
         <entry key="..\:/Users/Bruno/VenueApp/app/src/main/res/drawable-v24/ic_twitter_svgrepo_com.xml" value="0.1555" />
-        <entry key="..\:/Users/Bruno/VenueApp/app/src/main/res/drawable/ic_baseline_save_24.xml" value="0.2135" />
+        <entry key="..\:/Users/Bruno/VenueApp/app/src/main/res/layout/activity_data_base.xml" value="0.346875" />
+        <entry key="..\:/Users/Bruno/VenueApp/app/src/main/res/layout/activity_data_base2.xml" value="0.23229166666666667" />
         <entry key="..\:/Users/Bruno/VenueApp/app/src/main/res/layout/activity_main.xml" value="0.18541666666666667" />
-        <entry key="..\:/Users/Bruno/VenueApp/app/src/main/res/layout/fragment_data_base.xml" value="0.346875" />
         <entry key="..\:/Users/Bruno/VenueApp/app/src/main/res/layout/fragment_google_maps.xml" value="0.2375" />
-        <entry key="..\:/Users/Bruno/VenueApp/app/src/main/res/layout/fragment_venue_list.xml" value="0.33" />
+        <entry key="..\:/Users/Bruno/VenueApp/app/src/main/res/layout/fragment_venue_list.xml" value="0.1" />
         <entry key="..\:/Users/Bruno/VenueApp/app/src/main/res/layout/item_venue.xml" value="0.44360902255639095" />
         <entry key="..\:/Users/Bruno/VenueApp/app/src/main/res/layout/item_venues.xml" value="0.184375" />
       </map>

@@ -1,6 +1,7 @@
 package com.example.venueapp.data
 
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
@@ -13,7 +14,10 @@ interface VenueDataDao {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun addVenueData(venueData: VenueData)
 
-    @Query("SELECT * FROM venueDataTable ORDER BY distance ASC")
-    fun readAllData(): LiveData<List<VenueData>>
+    @Query("SELECT * FROM venueDataTable")
+    suspend fun readAllData(): List<VenueData>
+
+    @Query("DELETE FROM venueDataTable")
+    suspend fun deleteAll()
 
 }
